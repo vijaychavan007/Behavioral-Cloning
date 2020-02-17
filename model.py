@@ -98,11 +98,13 @@ train_generator = generator(train_samples, batch_size=32)
 validation_generator = generator(validation_samples, batch_size=32)
 
 import warnings
+warnings.filterwarnings('ignore')
 from keras.models import Sequential
 from keras.layers.core import Dense, Flatten, Activation, Dropout
 from keras.layers.convolutional import Convolution2D
 from keras.layers import Lambda, Cropping2D
-warnings.filterwarnings('ignore')
+from keras.utils.vis_utils import plot_model
+
 
 model = Sequential()
 
@@ -154,6 +156,7 @@ model.add(Activation('elu'))
 #layer 9- fully connected layer 1
 model.add(Dense(1)) #here the final layer will contain one value as this is a regression problem and not classification
 
+plot_model(model, to_file='model.png')
 
 # the output is the steering angle
 # using mean squared error loss function is the right choice for this regression problem
